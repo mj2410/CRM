@@ -1,0 +1,138 @@
+
+<div class="alert alert-success">
+	<label><h4><%= @contact.first_name + " " + @contact.last_name %></h4></label>
+	<ul>
+		<div class="float-left">
+			<button class="btn btn-primary" data-toggle="modal" data-target="#editContactModal"><%= t(:edit) %></button>
+		</div>
+		<label class="label label-info"><big><%= t(:mobile_number) %>: <%= @contact.mobile_number %></big></label><br>
+		<label class="label label-info"><big><%= t(:phone_number) %>: <%= @contact.phone_number %></big></label><br>
+		<label class="label label-info"><big><strong><%= t(:address) %>: </strong><%= @contact.address %></big></label><br>
+	</ul>
+</div>
+<h4><%= t(:calls) %>
+<button class="glyphicon glyphicon-plus Transparent" style="color: DodgerBlue;"  data-toggle="modal" data-target="#newCallModal"></button></h4>
+<% if @contact.calls.blank? %>
+	<p><%= t(:no_call) %>.</p>
+<% else %>
+	<% @contact.calls.each do |call| %>
+		<div class="panel-group">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<strong><%= t(:date_and_time) %>:</strong>
+					<%= call.date_time %>
+					<%= link_to "", contact_call_path(@contact,call), method: :delete, class: 'glyphicon glyphicon-trash  float-left', style: "text-decoration: none;" %>
+
+					<button class="Transparent glyphicon glyphicon-pencil float-left" data-toggle="modal" data-target="#editCallModal"></button>
+						<div id="editCallModal" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <%= form_for call, url: contact_call_path(@contact,call), method: :patch do |f| %>
+						    <div class="modal-content">
+						      <div class="modal-header">
+						      </div>
+						      <div class="modal-body">
+
+						      	<div class="form-group">
+									<strong><%= t(:call_description) %>:</strong><br>
+									<%= f.text_area :description, class: 'form-control' %><br>
+								
+									<strong><%= t(:call_rank) %>:</strong><br>
+									<%= f.number_field :rank, class: 'form-control' %><br>
+								
+									<strong><%= t(:date_and_time) %>:</strong><br>
+									<%= f.text_field :date_time, class: 'form-control', id:'date'%><br>
+								</div>	
+
+						      </div>
+						      <div class="modal-footer">
+						     <%= f.submit value= t(:make_call), class: 'btn btn-secondary' %>						        
+						      </div>
+						    </div>
+						    <% end -%>
+						  </div>
+						</div>
+
+				</div>
+				<div class="panel-body" style="word-wrap: break-word;">
+					<strong><%= t(:call_description) %>:</strong>
+						<%= call.description %><br>
+					<strong><%= t(:call_rank) %>:</strong>
+						<%= call.rank %>
+			</div>
+		</div>
+		</div>
+	<% end -%>
+<% end -%>
+
+<div id="editContactModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+      </div>
+  	  <%= form_for @contact, url: contact_path(id: @contact), method: :patch do |f|%>
+    
+      <div class="modal-body">
+      		<div class="form-group">
+				<strong><%= t(:'first_name') %>:</strong><br>
+				<%= f.text_field :first_name, class: 'form-control' %><br>
+			</div>
+			<div class="form-group">
+				<strong><%= t(:'last_name') %>:</strong><br>
+				<%= f.text_field :last_name, class: 'form-control' %><br>
+			</div>
+			<div class="form-group">
+				<strong><%= t(:'mobile_number') %>:</strong><br>
+				<%= f.text_field :mobile_number, class: 'form-control' %><br>
+			</div>
+			<div class="form-group">
+				<strong><%= t(:'phone_number') %>:</strong><br>
+				<%= f.text_field :phone_number, class: 'form-control' %><br>
+			</div>
+			<div class="form-group">
+				<strong><%= t(:'address') %>:</strong><br>
+				<%= f.text_area :address, class: 'form-control' %><br>
+			</div>
+      </div>
+      <div class="modal-footer">
+      	<%= f.submit value=t(:edit), class: 'btn btn-primary' %>
+		<% end -%>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="newCallModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <%= form_for([@contact,@contact.calls.build]) do |f| %>
+	    <div class="modal-content">
+	      <div class="modal-header">
+
+	       <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+	      </div>
+	      <div class="modal-body">
+	      	<div class="form-group">
+				<strong><%= t(:call_description) %>:</strong><br>
+				<%= f.text_area :description, class: 'form-control' %><br>
+			
+				<strong><%= t(:call_rank) %>:</strong><br>
+				<%= f.number_field :rank, class: 'form-control' %><br>
+			
+				<strong><%= t(:date_and_time) %>:</strong><br>
+				<%= f.text_field :date_time, class: 'form-control', id:'date'%><br>
+			</div>
+	      </div>
+	      <div class="modal-footer">
+
+			<%= f.submit value= t(:make_call), class: 'btn btn-secondary' %>
+	      </div>
+	    </div>
+    <% end -%>
+  </div>
+</div>
+

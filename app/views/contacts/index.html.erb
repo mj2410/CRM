@@ -1,0 +1,121 @@
+<div class="panel panel-header"> 
+        <h3>
+            <button class="glyphicon glyphicon-plus Transparent" style="color: DodgerBlue;" data-toggle="modal" data-target="#newContactModal"></button>
+
+        
+        	<button class="glyphicon glyphicon-search Transparent float-left" style="color: DodgerBlue;" data-toggle="modal" data-target="#searchContactsModal"></button>
+        </h3>
+</div>
+<div class="panel panel-body">
+	<ul class="list-group">
+		<% @contacts.each do |contact| %>
+			<li class= "list-group-item">
+				<div class="list-group-item-heading">
+					<div class="dropdown">
+						<button type="button" class="btn btn-primary dropdown-toggle float-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<%= t(:actions) %>
+		  					<span class="caret"></span>
+						</button>
+
+						<ul class="dropdown-menu dropdown-menu-left"> 
+							<li><%= link_to t(:'calls_details'), contact_path(id: contact), method: :get%></li>
+							<li><%= link_to t(:'delete'), contact_path(id: contact), method: :delete%></li>
+
+						</ul>
+					</div>
+					<strong><%= contact.first_name + " " + contact.last_name %></strong>
+				</div>
+
+				<p class="list-group-item-text">
+					<small class="float-right"><%= contact.mobile_number %></small><br>
+				</p>
+			</li>
+		<% end -%>
+	</ul>
+</div>
+
+<div id="newContactModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+      </div>
+    <div style="margin-left: 30px">
+		<%= form_for :contact, url: contacts_path do |f|%>
+     		<div class="modal-body">
+
+				<% if @contact.errors.any? %>
+					<% @contact.errors.full_messages.each do |msg| %>
+						<div class="alert alert-danger"><%= msg %></div>
+					<% end -%>
+				<% end -%> 
+				<div class="form-group">
+					<strong><%= t(:'first_name') %>:</strong><br>
+					<%= f.text_field :first_name, class: 'form-control' %><br>
+				</div>
+				<div class="form-group">
+					<strong><%= t(:'last_name') %>:</strong><br>
+					<%= f.text_field :last_name, class: 'form-control' %><br>
+				</div>
+				<div class="form-group">
+					<strong><%= t(:'mobile_number') %>:</strong><br>
+					<%= f.text_field :mobile_number, class: 'form-control' %><br>
+				</div>
+				<div class="form-group">
+					<strong><%= t(:'phone_number') %>:</strong><br>
+					<%= f.text_field :phone_number, class: 'form-control' %><br>
+				</div>
+				<div class="form-group">
+					<strong><%= t(:'address') %>:</strong><br>
+					<%= f.text_area :address, class: 'form-control' %><br>
+				</div>
+      	</div>
+      	<div class="modal-footer">
+			<div>
+				<%= f.submit t(:'submit_contact'), class: 'btn btn-primary' %>
+			</div>
+
+		<% end -%>
+      	</div>
+	</div>
+    </div>
+  </div>
+</div>
+
+<div id="searchContactsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <%= form_for :subject, url: contacts_search_results_path, method: :get do |f|%>
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+      		<div class = "form-group">
+				<%= f.label t(:name) %><br>
+				<%= f.text_field :name, class: 'form-control'%>
+			</div>
+			<div class = "form-group">
+				<%= f.label t(:number) %><br>
+				<%= f.text_field :number, class: 'form-control' %>
+			</div>
+			<div class = "form-group">
+				<%= f.label t(:address) %><br>
+				<%= f.text_area :address, class: 'form-control' %>
+			</div>
+			<div class="alert alert-info">
+				<small class="form-text text-muted"><%=t(:search_guide)%>.</small><br>
+			</div>
+      </div>
+
+      <div class="modal-footer">
+    	<%= f.submit value: t(:search), class: 'btn btn-primary' %>
+      </div>
+
+    <% end -%>
+    </div>
+  </div>
+</div>

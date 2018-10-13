@@ -1,0 +1,96 @@
+fa:
+  #new contact page
+  first_name: 'نام'
+  last_name: 'نام خانوادگی'
+  mobile_number: 'شماره موبایل'
+  address: 'آدرس'
+  back_to_list: 'لیست مخاطبین'
+  submit_contact: 'اضافه کن'
+  phone_number: 'شماره تلفن'
+
+  #index page
+  contacts: 'مخاطبین'
+  new_contact: 'مخاطب جدید'
+  search: 'جست و جوی مخاطبین'
+  calls_details: 'اطلاعات تماس ها'
+  delete: 'حذف'
+
+  #show page
+  edit: 'ویرایش'
+  calls: 'تماس ها'
+  no_call: 'لیست تماس ها خالیست'
+  call_description: 'شرح تماس'
+  call_rank: 'امتیاز'
+  date_and_time: 'زمان تماس'
+  make_call: 'ثبت تماس'
+
+  #edit page
+  edit_contact: 'ویرایش مخاطب'
+
+  #search page
+  name: 'نام'
+  search: 'جست و جو'
+  search_guide: '*حداقل یکی از گزینه های بالا را تکمیل کنید'
+  number: 'شماره موبایل و یا تلفن'
+  #result page
+  result: 'نتایج'
+
+  #users pages
+  users: 'کاربران'
+  email: 'آدرس ایمیل'
+  password: 'رمز عبور'
+  submit_user: 'ثبت نام'
+  users: 'کاربران'
+  new_user: 'کاربر جدید'
+  password_limit: 'حداقل کاراکتر'
+  password_confirm: 'تایید رمز عبور'
+  current_password: 'رمز فعلی'
+  password_update_guide: 'اگر نمی خواهید تغییر دهید خالی بگذارید.'
+
+  logged_as: 'ایمیل شما:'
+  edit_profile: 'ویرایش پروفایل'
+  log_out: 'خروج'
+  sign_up: 'ثبت نام'
+  log_in: 'ورود'
+  remember_me: 'مرا به یاد آور'
+  forget_password: 'رمزو عبور را فراموش کرده ام'
+  search_users: 'جست و جوی کاربران'
+  active: 'فعال'
+  not_active: 'غیر فعال'
+
+  unauthorized: 'اجازه ندارید.'
+  back: 'بازگشت'
+  actions: 'گزینه ها'
+
+  #Validate Errors
+  activerecord:
+    attributes:
+      user:
+        email: "آدرس ایمیل"
+        password: "رمز عبور"
+        password_confirmation: "رمز عبور"
+        current_password: ""
+      contact:
+        last_name: "نام خانوادگی"
+        mobile_number: "شماره موبایل"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "وارد نشده است!"
+              invalid: "صحیح نمی باشد!"
+            password:
+              blank: "وارد نشده است!"
+              too_short: "خیلی کوتاه است!"
+            password_confirmation:
+              confirmation: "تایید نشد!"
+            current_password:
+              blank: "لطفا رمز عبور فعلی را برای هر گونه تغییری وارد نمیایید."
+        contact:
+          attributes:
+            last_name: 
+              blank: "نمی تواند خالی باشد."
+            mobile_number: 
+              blank: "باید ثبت شود."
+            

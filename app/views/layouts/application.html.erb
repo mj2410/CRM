@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crm2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script>
+      $("#date").pDatepicker(
+                {
+                    observer: true,
+
+                    format: 'YYYY/MM/DD',
+
+                    autoClose: true,
+                    initialValue: false
+                }
+            );
+    </script>
+  </head>
+
+  <nav class="navbar navbar-default"> 
+     <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to t(:contacts),home_path, class: "StarterFont"  %>
+          </li>
+        </ul>
+      <%if user_signed_in? %>
+        <%if current_user.user_type == 1 %>
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <%= link_to t(:users), users_path, class: "StarterFont"%>
+                </li>
+              </ul>
+        <% end -%>
+      <% end -%>
+        
+
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+              <%= link_to t(:log_out), destroy_user_session_path, method: :delete, class: 'navbar-link StarterFont'  %>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+              <%= link_to t(:edit_profile), edit_user_registration_path, class: 'navbar-link StarterFont'%> 
+            </li>
+          </ul>
+             
+        <% else %>
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+                <%= link_to t(:sign_up), new_user_registration_path, :class => 'navbar-link StarterFont'  %> 
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-left">
+             <li>
+                <%= link_to t(:log_in), new_user_session_path, :class => 'navbar-link StarterFont'  %>
+             </li>
+          </ul>
+        <% end %>
+      </div>
+    </nav>
+
+
+  
+
+  <body>
+    <div class="container BodyFont">
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+    </div>
+
+     
+  </body>
+</html>
+

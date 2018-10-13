@@ -1,0 +1,36 @@
+<div class="panel panel-header">
+	<h3><%= t(:edit_contact) %></h3>
+	<% if @contact.errors.any? %>
+		<% @contact.errors.full_messages.each do |msg| %>
+			<div class="alert alert-danger"><%= msg %></div>
+		<% end -%>
+	<% end -%> 
+</div>
+<%= form_for @contact, url: contact_path(id: @contact), method: :patch do |f|%>
+<div class="panel panel-body">
+	
+	<div class="form-group">
+		<strong><%= t(:'first_name') %>:</strong><br>
+		<%= f.text_field :first_name, class: 'form-control' %><br>
+	</div>
+	<div class="form-group">
+		<strong><%= t(:'last_name') %>:</strong><br>
+		<%= f.text_field :last_name, class: 'form-control' %><br>
+	</div>
+	<div class="form-group">
+		<strong><%= t(:'mobile_number') %>:</strong><br>
+		<%= f.text_field :mobile_number, class: 'form-control' %><br>
+	</div>
+	<div class="form-group">
+		<strong><%= t(:'phone_number') %>:</strong><br>
+		<%= f.text_field :phone_number, class: 'form-control' %><br>
+	</div>
+	<div class="form-group">
+		<strong><%= t(:'address') %>:</strong><br>
+		<%= f.text_area :address, class: 'form-control' %><br>
+	</div>
+<%= f.submit value=t(:edit), class: 'btn btn-primary' %>
+</div>
+<div class="panel panel-footer">
+<% end -%>
+</div>

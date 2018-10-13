@@ -1,0 +1,38 @@
+<div class="panel panel-body">
+		<ul class="list-group">
+			<% @users.each do |user| %>
+				<li class="list-group-item">
+					<div class="list-group-item-heading">
+						<div class="dropdown">
+							<button type="button" class="btn btn-primary dropdown-toggle float-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<%= t(:actions) %>
+	  						<span class="caret"></span>
+							</button>
+
+							<ul class="dropdown-menu dropdown-menu-left"> 
+								<li><%= link_to t(:'edit'), edit_user_path(id: user), method: :get %></li>
+									
+					   			<% if user.user_type != 1 %>
+									<li><%= link_to t(:'delete'), user_path(id: user), method: :delete%></li>
+				   					<li><%= link_to t(:'active'), active_user_path(id: user), method: :post%></li>
+				   					<li><%= link_to t(:'not_active'), deactive_user_path(id: user), method: :post%></li>
+								<% end -%>
+							</ul>
+						</div>
+						<strong class="EmailFont"><%= user.email %></strong>
+					</div>
+					<p class=" list-group-item-text">
+						<small class="float-right">
+							<% if user.user_type == 2 %>
+								<%= t(:active) %>
+							<% else %>
+								<% if user.user_type != 1 %>
+									<%= t(:not_active) %>
+								<% end -%>
+							<% end -%>
+						</small><br>
+					</p>
+				</li>
+			<% end -%>
+		</ul>
+	</div>

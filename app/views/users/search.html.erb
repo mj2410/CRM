@@ -1,0 +1,8 @@
+<%= form_for :user, url: users_search_results_path, method: :get do |f|%>
+	<div class = "form-group">
+		<%= f.label t(:email) %><br>
+		<%= f.text_field :email, class: 'form-control'%>
+	</div>
+<%= f.submit value: t(:search), class: 'btn btn-primary' %>
+
+<% end -%>

@@ -1,0 +1,27 @@
+<div class="panel panel-body">
+	<ul class="list-group">
+		<% @contacts.each do |contact| %>
+			<li class= "list-group-item">
+				<div class="list-group-item-heading">
+					<div class="dropdown">
+						<button type="button" class="btn btn-primary dropdown-toggle float-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<%= t(:actions) %>
+		  					<span class="caret"></span>
+						</button>
+
+						<ul class="dropdown-menu dropdown-menu-left"> 
+							<li><%= link_to t(:'calls_details'), contact_path(id: contact), method: :get%></li>
+							<li><%= link_to t(:'delete'), contact_path(id: contact), method: :delete%></li>
+
+						</ul>
+					</div>
+					<strong><%= contact.first_name + " " + contact.last_name %></strong>
+				</div>
+
+				<p class="list-group-item-text">
+					<small class="float-right"><%= contact.mobile_number %></small><br>
+				</p>
+			</li>
+		<% end -%>
+	</ul>
+</div>

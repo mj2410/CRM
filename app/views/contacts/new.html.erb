@@ -1,0 +1,33 @@
+<div style="margin-left: 30px">
+<%= form_for :contact, url: contacts_path do |f|%>
+	<% if @contact.errors.any? %>
+		<% @contact.errors.full_messages.each do |msg| %>
+			<div class="alert alert-danger"><%= msg %></div>
+		<% end -%>
+	<% end -%> 
+	<div class="form-group">
+		<strong><%= t(:'first_name') %>:</strong><br>
+		<%= f.text_field :first_name, class: 'form-control' %><br>
+	</div>
+	<div class="form-group">
+		<strong><%= t(:'last_name') %>:</strong><br>
+		<%= f.text_field :last_name, class: 'form-control' %><br>
+	</div>
+	<div class="form-group">
+		<strong><%= t(:'mobile_number') %>:</strong><br>
+		<%= f.text_field :mobile_number, class: 'form-control' %><br>
+	</div>
+	<div class="form-group">
+		<strong><%= t(:'phone_number') %>:</strong><br>
+		<%= f.text_field :phone_number, class: 'form-control' %><br>
+	</div>
+	<div class="form-group">
+		<strong><%= t(:'address') %>:</strong><br>
+		<%= f.text_area :address, class: 'form-control' %><br>
+	</div>
+	<div>
+		<%= f.submit t(:'submit_contact'), class: 'btn btn-primary' %>
+	</div>
+
+<% end -%>
+</div>
